@@ -19,19 +19,19 @@
 /* Fonts */
 @font-face {
   font-family: 'Geist';
-  src: url('../assets/fonts/Geist-Bold.ttf') format('truetype');
+  src: url('./fonts/Geist-Bold.woff') format('truetype');
   font-weight: bold;
   font-style: normal;
 }
 @font-face {
   font-family: 'Geist';
-  src: url('../assets/fonts/Geist-SemiBold.ttf') format('truetype');
+  src: url('./fonts/Geist-SemiBold.woff') format('truetype');
   font-weight: semibold;
   font-style: normal;
 }
 @font-face {
   font-family: 'Geist';
-  src: url('../assets/fonts/Geist-Light.ttf') format('truetype');
+  src: url('./fonts/Geist-Light.woff') format('truetype');
   font-weight: light;
   font-style: normal;
 }

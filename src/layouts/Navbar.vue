@@ -13,7 +13,7 @@ export default {
   <header>
     <nav>
       <!-- Logo -->
-      <RouterLink to="/">Logo</RouterLink>
+      <RouterLink to="/">Palette Creator</RouterLink>
 
       <!-- Hamburger Menu -->
       <button class="hamburger">
@@ -25,13 +25,10 @@ export default {
       <!-- Menu -->
       <ul>
         <li>
-          <RouterLink to="/">Home</RouterLink>
+          <RouterLink to="/">Inicio</RouterLink>
         </li>
         <li>
-          <RouterLink to="/">Products</RouterLink>
-        </li>
-        <li>
-          <RouterLink to="/">Contact</RouterLink>
+          <RouterLink to="/favorites">Favoritos</RouterLink>
         </li>
       </ul>
     </nav>
@@ -44,18 +41,33 @@ header {
   top: 0;
   left: 0;
   width: 100%;
-  background-color: gray;
+  background-color: var(--background-color);
 
   nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 20px;
-    max-width: 1100px;
+    padding: 1rem 0;
+    max-width: 1280px;
     margin: 0 auto;
 
     .hamburger {
       display: none;
+    }
+    ul {
+      display: flex;
+      gap: 2rem;
+      li {
+        list-style: none;
+        a {
+          text-decoration: none;
+          color: var(--light-text-color);
+
+          &:hover {
+            color: var(--primary-color);
+          }
+        }
+      }
     }
   }
 }
