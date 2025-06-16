@@ -26,6 +26,7 @@ export default {
     }
   },
   methods: {
+    // Global
     setLoading(value) {
       this.isLoading = value
     },
@@ -39,6 +40,7 @@ export default {
         onConfirm: null,
       }
     },
+
     showConfirm(message, onConfirm) {
       this.modal = {
         show: true,
@@ -47,9 +49,11 @@ export default {
         onConfirm,
       }
     },
+
     closeModal() {
       this.modal.show = false
     },
+
     handleConfirm() {
       if (this.modal.onConfirm) {
         this.modal.onConfirm()

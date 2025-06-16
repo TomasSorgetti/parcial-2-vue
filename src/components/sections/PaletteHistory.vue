@@ -14,14 +14,17 @@ export default {
       type: Array,
       required: true,
     },
-    deletePalette: {
-      type: Function,
-      required: true,
-    },
-    favorites: {
-      type: Array,
-      required: true,
-    },
+  },
+  data() {
+    return {
+      favorites: [],
+    }
+  },
+  mounted() {
+    const storedFavorites = localStorage.getItem('favorites')
+    if (storedFavorites) {
+      this.favorites = JSON.parse(storedFavorites)
+    }
   },
 }
 </script>
@@ -37,8 +40,8 @@ export default {
           v-else
           v-for="palette in palettes"
           :palette="palette"
-          :deletePalette="deletePalette"
           :isLoading="isLoading"
+          :isFavorite="favorites.some((favorite) => favorite.id === palette.id)"
         ></PaletteCard>
       </div>
     </div>
@@ -47,7 +50,7 @@ export default {
 
 <style>
 .palette-history {
-  margin-top: 16rem;
+  margin-top: 20rem;
   min-height: 80vh;
   background-image: url('../../assets/images/history_bg.png');
   background-size: cover;

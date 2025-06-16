@@ -96,7 +96,6 @@ export default {
             :modes="modes"
             :set-selected-palette="setSelectedPalette"
             :create-palette="createPalette"
-            :delete-palette="deletePalette"
           />
         </div>
         <!-- componente de paletas -->
@@ -107,8 +106,6 @@ export default {
     <PaletteHistory
       :isLoading="isLoading"
       :palettes="palettes"
-      :delete-palette="deletePalette"
-      :favorites="favorites"
     />
   </main>
 </template>

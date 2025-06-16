@@ -1,6 +1,11 @@
 <script>
+import { RouterLink } from 'vue-router'
+
 export default {
   name: 'PaletteCard',
+  components: {
+    RouterLink,
+  },
   props: {
     palette: {
       type: Object,
@@ -10,9 +15,10 @@ export default {
       type: Boolean,
       required: true,
     },
-    deletePalette: {
-      type: Function,
-      required: true,
+    isFavorite: {
+      type: Boolean,
+      required: false,
+      default: false,
     },
   },
   methods: {
@@ -25,10 +31,12 @@ export default {
 </script>
 
 <template>
-  <div class="card">
-    <button @click="deletePalette(palette.id)" v-bind:disabled="isLoading" class="delete-palette">
-      X
-    </button>
+  <RouterLink
+    :to="`/palette/${palette.id}`"
+    class="card"
+    :style="{ borderColor: isFavorite ? 'var(--primary-color)' : '' }"
+  >
+    <div v-if="isFavorite" class="favorite"></div>
     <h3>{{ palette.name }}</h3>
     <p>{{ palette.description }}</p>
     <div class="palette-info">
@@ -52,7 +60,7 @@ export default {
         </button>
       </li>
     </ul>
-  </div>
+  </RouterLink>
 </template>
 
 <style>
@@ -63,24 +71,32 @@ export default {
   padding: 1rem 2rem;
   border-radius: 20px;
   width: 100%;
+  min-width: 340px;
   max-width: 360px;
   min-height: 200px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: 1rem;
+  text-decoration: none;
+  color: var(--light-text-color);
+  transition: background-color 0.3s ease;
 
-  .delete-palette {
-    position: absolute;
-    top: 0.5rem;
-    right: 1rem;
-    background-color: transparent;
-    border: none;
-    color: var(--light-text-color);
-    font-size: var(--font-size-2xl);
-    cursor: pointer;
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.7);
   }
 
+  .favorite {
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background-image: url('../../assets/images/heart.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
   h3 {
     text-transform: uppercase;
   }

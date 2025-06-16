@@ -13,7 +13,7 @@ export default {
   <header>
     <nav>
       <!-- Logo -->
-      <RouterLink to="/">Palette Creator</RouterLink>
+      <RouterLink to="/" class="logo">Palette Creator</RouterLink>
 
       <!-- Hamburger Menu -->
       <button class="hamburger">
@@ -41,16 +41,24 @@ header {
   top: 0;
   left: 0;
   width: 100%;
-  background-color: var(--background-color);
+  background-color: rgba(0, 0, 0, 0.651);
+  z-index: 999;
 
   nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem 0;
+    padding: 2rem 0;
     max-width: 1280px;
     margin: 0 auto;
 
+    .logo {
+      color: var(--light-text-color);
+      text-decoration: none;
+      font-size: var(--font-size-2xl);
+      font-weight: bold;
+      text-transform: uppercase;
+    }
     .hamburger {
       display: none;
     }
@@ -62,6 +70,9 @@ header {
         a {
           text-decoration: none;
           color: var(--light-text-color);
+          text-transform: uppercase;
+          font-weight: 300;
+          transition: all 0.3s ease-in-out;
 
           &:hover {
             color: var(--primary-color);
