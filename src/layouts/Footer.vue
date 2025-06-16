@@ -15,8 +15,11 @@ export default {
 </template>
 
 <style>
-footer p {
-  text-align: center;
-  padding: 3rem 0;
+footer {
+  background-color: var(--background-color);
+  p {
+    text-align: center;
+    padding: 3rem 0;
+  }
 }
 </style>

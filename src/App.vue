@@ -74,20 +74,31 @@ export default {
 </script>
 
 <template>
-  <Navbar />
-  <RouterView />
-  <AppFooter />
+  <v-app>
+    <Navbar />
+    <v-main>
+      <v-slide-x-transition :duration="400" mode="out-in">
+        <RouterView />
+      </v-slide-x-transition>
+    </v-main>
+    <AppFooter />
 
-  <Loading :isLoading="isLoading" />
+    <Loading :is-loading="isLoading" />
 
-  <Modal
-    v-if="modal.show"
-    :show="modal.show"
-    :message="modal.message"
-    :type="modal.type"
-    @close="closeModal"
-    @confirm="handleConfirm"
-  />
+    <Modal
+      v-if="modal.show"
+      :show="modal.show"
+      :message="modal.message"
+      :type="modal.type"
+      @close="closeModal"
+      @confirm="handleConfirm"
+    />
+  </v-app>
 </template>
 
-<style scoped></style>
+<style scoped>
+.v-main {
+  padding: 0;
+  background-color: var(--background-color);
+}
+</style>
