@@ -1,7 +1,7 @@
 <script>
-import PaletteCreator from '@/components/PaletteCreator.vue'
-import PaletteHistory from '@/components/PaletteHistory.vue'
-import SelectedPalette from '@/components/SelectedPalette.vue'
+import PaletteCreator from '@/components/sections/PaletteCreator.vue'
+import PaletteHistory from '@/components/sections/PaletteHistory.vue'
+import SelectedPalette from '@/components/sections/SelectedPalette.vue'
 
 export default {
   name: 'HomeView',
@@ -10,9 +10,9 @@ export default {
     SelectedPalette,
     PaletteHistory,
   },
+  inject: ['isLoading', 'setLoading', 'showConfirm', 'showAlert'],
   data() {
     return {
-      isLoading: false,
       palettes: [],
       selectedPalette: [],
       categories: [
@@ -28,12 +28,13 @@ export default {
       favorites: [],
     }
   },
+
   methods: {
     createPalette(palette) {
       const paletteData = { ...palette }
       const paletteSelected = [...this.selectedPalette]
       this.selectedPalette = []
-      this.isLoading = true
+      this.setLoading(true)
       setTimeout(() => {
         const newPalette = {
           id: Date.now(),
@@ -46,17 +47,17 @@ export default {
         }
         this.palettes.push(newPalette)
         localStorage.setItem('palettes', JSON.stringify(this.palettes))
-        this.isLoading = false
+        this.setLoading(false)
         this.showAlert('¡Paleta creada exitosamente!')
       }, 1500)
     },
     deletePalette(id) {
       this.showConfirm('¿Estás seguro de eliminar esta paleta?', () => {
-        this.isLoading = true
+        this.setLoading(true)
         setTimeout(() => {
           this.palettes = this.palettes.filter((palette) => palette.id !== id)
           localStorage.setItem('palettes', JSON.stringify(this.palettes))
-          this.isLoading = false
+          this.setLoading(false)
           this.showAlert('Paleta eliminada exitosamente')
         }, 500)
       })
