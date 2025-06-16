@@ -41,14 +41,18 @@ export default {
   min-height: 80vh;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
   gap: 4rem;
 
   .palette-list {
     display: flex;
     flex-wrap: wrap;
     gap: 2rem;
+    width: 100%;
   }
 }
 </style>

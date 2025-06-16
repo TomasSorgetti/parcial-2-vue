@@ -254,8 +254,8 @@ export default {
 
 <style>
 .selected-palette {
-  transform: translateY(16rem);
   position: relative;
+  z-index: 3;
 
   img {
     position: absolute;

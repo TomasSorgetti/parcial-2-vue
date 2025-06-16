@@ -99,14 +99,13 @@ export default {
           />
         </div>
         <!-- componente de paletas -->
-        <SelectedPalette :selectedPalette="selectedPalette" />
+        <div class="selected-palette">
+          <SelectedPalette :selectedPalette="selectedPalette" />
+        </div>
       </div>
     </section>
     <!-- componente de historial depaletas -->
-    <PaletteHistory
-      :isLoading="isLoading"
-      :palettes="palettes"
-    />
+    <PaletteHistory :isLoading="isLoading" :palettes="palettes" />
   </main>
 </template>
 
@@ -141,6 +140,9 @@ main {
           text-transform: uppercase;
           max-width: 700px;
         }
+      }
+      .selected-palette {
+        transform: translateY(4rem);
       }
     }
   }

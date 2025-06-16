@@ -1,4 +1,5 @@
 <script>
+import SelectedPalette from '@/components/sections/SelectedPalette.vue'
 import { RouterLink } from 'vue-router'
 
 export default {
@@ -6,6 +7,7 @@ export default {
   inject: ['isLoading', 'setLoading', 'showConfirm', 'showAlert'],
   components: {
     RouterLink,
+    SelectedPalette,
   },
   data() {
     return {
@@ -35,12 +37,14 @@ export default {
       favorites.push(this.palette)
       localStorage.setItem('favorites', JSON.stringify(favorites))
       this.favorite = true
+      this.showAlert('Paleta agregada a favoritos')
     },
     removeFavorite() {
       const favorites = JSON.parse(localStorage.getItem('favorites')) || []
       const newFavorites = favorites.filter((favorite) => favorite.id !== this.palette.id)
       localStorage.setItem('favorites', JSON.stringify(newFavorites))
       this.favorite = false
+      this.showAlert('Paleta eliminada de favoritos')
     },
   },
   mounted() {
@@ -63,15 +67,9 @@ export default {
     </div>
     <div v-else class="detail-wrapper">
       <!-- Palette colors -->
-      <div>
-        <!-- <ul class="color-list">
-          <li v-bind:key="color" v-for="color in palette.colors" class="color-circle">
-            <span>{{ color }}</span>
-          </li>
-        </ul> -->
-      </div>
+      <SelectedPalette :selectedPalette="palette.colors" />
       <!-- Palette info -->
-      <div>
+      <div class="detail-info">
         <h1>{{ palette.name }}</h1>
         <p>{{ palette.description }}</p>
         <div class="palette-info">
@@ -85,8 +83,13 @@ export default {
           </div>
         </div>
 
-        <button v-if="!favorite" @click="addFavorite()">Añadir a favoritos</button>
-        <button v-else @click="removeFavorite()">Eliminar de favoritos</button>
+        <button v-if="!favorite" @click="addFavorite()" class="add-favorite">
+          <div class="favorite"></div>
+          Añadir a favoritos
+        </button>
+        <button v-else @click="removeFavorite()" class="remove-favorite">
+          Eliminar de favoritos
+        </button>
         <button class="delete-palette" @click="deletePalette(palette.id)">Eliminar paleta</button>
       </div>
     </div>
@@ -112,33 +115,83 @@ export default {
     }
   }
 
-  h1 {
-    text-transform: uppercase;
-  }
-  .palette-info {
+  .detail-wrapper {
     display: flex;
-    gap: 1rem;
-    .mode-info {
+    justify-content: center;
+    align-items: start;
+    gap: 4rem;
+    .detail-info {
+      padding: 4rem 2rem;
       display: flex;
-      gap: 0.5rem;
-      align-items: center;
-    }
-    .category-info {
-      display: flex;
-      gap: 0.5rem;
-      align-items: center;
-    }
-    .mode-circle {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background-color: var(--primary-color);
-    }
-    .category-circle {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background-color: rgb(0, 183, 255);
+      flex-direction: column;
+      gap: 2rem;
+      align-items: flex-start;
+
+      h1 {
+        text-transform: uppercase;
+      }
+      .palette-info {
+        display: flex;
+        gap: 1rem;
+        .mode-info {
+          display: flex;
+          gap: 0.5rem;
+          align-items: center;
+        }
+        .category-info {
+          display: flex;
+          gap: 0.5rem;
+          align-items: center;
+        }
+        .mode-circle {
+          width: 10px;
+          height: 10px;
+          border-radius: 50%;
+          background-color: var(--primary-color);
+        }
+        .category-circle {
+          width: 10px;
+          height: 10px;
+          border-radius: 50%;
+          background-color: rgb(0, 183, 255);
+        }
+      }
+
+      .add-favorite {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        height: 40px;
+        background-color: var(--background-color);
+        padding: 0 1rem;
+        border: 1px solid rgb(70, 70, 70);
+        border-radius: 0.3rem;
+        color: var(--light-text-color);
+        cursor: pointer;
+        text-transform: uppercase;
+        transition: all 0.3s ease-in-out;
+
+        .favorite {
+          display: block;
+          width: 20px;
+          height: 20px;
+          background-image: url('../assets/images/heart.png');
+          background-size: cover;
+          background-position: center;
+          background-repeat: no-repeat;
+        }
+      }
+      .remove-favorite {
+        background-color: var(--primary-color);
+        padding: 0 1rem;
+        height: 40px;
+        border: none;
+        border-radius: 0.3rem;
+        color: var(--light-text-color);
+        cursor: pointer;
+        text-transform: uppercase;
+        transition: all 0.3s ease-in-out;
+      }
     }
   }
 
@@ -148,6 +201,8 @@ export default {
     border: none;
     display: block;
     cursor: pointer;
+    text-decoration: underline;
+    padding: 0.5rem;
   }
 }
 </style>

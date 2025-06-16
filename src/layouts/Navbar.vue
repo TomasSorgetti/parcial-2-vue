@@ -43,6 +43,7 @@ header {
   width: 100%;
   background-color: rgba(0, 0, 0, 0.651);
   z-index: 999;
+  border-bottom: 1px solid var(--light-dark-color);
 
   nav {
     display: flex;
